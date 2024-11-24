@@ -42,7 +42,7 @@ const BikesSchema = new Schema<IBike>(
     },
   },
   {
-    timestamps: true, // Adds createdAt and updatedAt fields automatically
+    timestamps: true, 
     versionKey: false,
   }
 )

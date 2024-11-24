@@ -1,12 +1,13 @@
 import express, { Request, Response } from 'express'
 import BikesRouter from './module/Products/Bikes.route'
+import OrderRouter from './module/Orders/Order.route'
 const app = express()
 
 // middleware
 app.use(express.json())
 
 app.use('/api/products', BikesRouter)
-// app.use('/api/tour', tourRouter)
+app.use('/api/orders', OrderRouter)
 
 // POST: /api/user/create-user
 
