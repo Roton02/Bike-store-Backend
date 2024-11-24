@@ -15,7 +15,7 @@ const createBike = async (req: Request, res: Response) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: 'something went wrong',
+      message: error.name,
       error: error,
     })
   }
@@ -23,17 +23,17 @@ const createBike = async (req: Request, res: Response) => {
 
 const getAllBikes = async (req: Request, res: Response) => {
   try {
-    const searchTerm   = req.query
+    const searchTerm = req.query
     const result = await bikesServices.getAllBikesFromDb(searchTerm)
     res.status(200).json({
       message: 'Bikes retrieved successfully',
-      success: true,  
+      success: true,
       data: result,
     })
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: 'something went wrong',
+      message: error.name,
       error: error,
     })
   }
@@ -52,7 +52,7 @@ const getSpecificBike = async (req: Request, res: Response) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: 'something went wrong',
+      message: error.name,
       error: error,
     })
   }
@@ -72,7 +72,7 @@ const updateProducts = async (req: Request, res: Response) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: 'something went wrong',
+      message: error.name,
       error: error,
     })
   }
@@ -92,7 +92,7 @@ const deleteBike = async (req: Request, res: Response) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: 'something went wrong',
+      message: error.name,
       error: error,
     })
   }

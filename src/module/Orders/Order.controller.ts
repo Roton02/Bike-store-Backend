@@ -12,9 +12,10 @@ const createOrder = async (req: Request, res: Response) => {
     })
     //TODO : error message gula thik kora lagbe --//
   } catch (error) {
+    console.log(error)
     res.status(500).json({
       success: false,
-      message: 'something went wrong',
+      message: error.name,
       error: error,
     })
   }
@@ -31,7 +32,7 @@ const totalrevenue = async (req: Request, res: Response) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: 'something went wrong',
+      message: error.name,
       error: error,
     })
   }
