@@ -6,7 +6,7 @@ const app = express()
 // middleware
 app.use(express.json())
 
-app.use('/api/products', BikesRouter)
+app.use('/api/products', BikesRouter) //    /api/products
 app.use('/api/orders', OrderRouter) 
 
 // POST: /api/user/create-user
