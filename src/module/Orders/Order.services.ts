@@ -11,28 +11,43 @@ const OrderBikeIntroDB = async (orderData: IOrder) => {
     const cheekQuantity = isExistBike.quantity - orderData.quantity
     // console.log(cheekQuantity)
     if (cheekQuantity <= 0) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const result = await BikeModel.findByIdAndUpdate(productId, {
         inStock: false,
       })
       // console.log('updated result' ,result);
-      return {success: false , message:'stock is over '}
+      return { success: false, message: 'stock is over ' }
     }
     if (!isExistBike.inStock) {
-      return {success: false , message:'inStock is false thats why unavailable product  '}
+      return {
+        success: false,
+        message: 'inStock is false thats why unavailable product  ',
+      }
     }
     if (isExistBike && cheekQuantity > 0) {
-      const decrement =  await BikeModel.findByIdAndUpdate(productId, {
+      const decrement = await BikeModel.findByIdAndUpdate(productId, {
         $inc: { quantity: -orderData.quantity },
       })
-      console.log(decrement , 'decrement from bikes collection');
+      console.log(decrement, 'decrement from bikes collection')
       const result = await OrderModel.create(orderData)
       return result
     }
   }
-  console.log('something is gone a wrong');
+  console.log('something is gone a wrong')
   return
 }
 
+//TODO : multifly value is not correct 
+const totalRevenueFromDB = async () => {
+  const result = await OrderModel.aggregate([
+    {$group : {'_id': "$quantity" , 'totalQuantity' : {$sum : '$quantity'}, 'totalPrice' :{$sum :'$totalPrice'}} },
+    // {$group : {'_id': "$totalPrice" , 'totalPriceValue' : {$sum : '$totalPrice'}} },
+    {$project : {_id : -1 , totalRevenue :{$multiply : ['$totalQuantity' , '$totalPrice']}}}
+  ])
+  console.log(result , 'asdffasdfsdf');
+  return result
+}
 export const OrderServices = {
-   OrderBikeIntroDB,
+  OrderBikeIntroDB,
+  totalRevenueFromDB,
 }

@@ -7,7 +7,7 @@ const app = express()
 app.use(express.json())
 
 app.use('/api/products', BikesRouter)
-app.use('/api/orders', OrderRouter)
+app.use('/api/orders', OrderRouter) 
 
 // POST: /api/user/create-user
 

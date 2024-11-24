@@ -1,6 +1,6 @@
 import { model, Schema } from 'mongoose'
-import IOrder from './order.interface'
 import { isEmail } from 'validator'
+import IOrder from './Order.interface'
 
 const OrderSchema = new Schema<IOrder>(
   {

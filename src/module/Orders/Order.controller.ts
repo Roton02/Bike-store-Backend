@@ -10,6 +10,7 @@ const createOrder = async (req: Request, res: Response) => {
       success: true,
       data: result,
     })
+    //TODO : error message gula thik kora lagbe --//
   } catch (error) {
     res.status(500).json({
       success: false,
@@ -19,7 +20,24 @@ const createOrder = async (req: Request, res: Response) => {
   }
 }
 
+const totalrevenue = async (req: Request, res: Response) => {
+  try {
+    const result = await OrderServices.totalRevenueFromDB()
+    res.status(200).json({
+      message: 'Revenue calculated successfully',
+      success: true,
+      data: result,
+    })
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: 'something went wrong',
+      error: error,
+    })
+  }
+}
 
 export const orderController = {
-    createOrder
+  createOrder,
+  totalrevenue,
 }

@@ -3,6 +3,7 @@ import { orderController } from './Order.controller'
 
 const OrderRouter = express.Router()
 
-OrderRouter.post('/order-bike', orderController.createOrder)
+OrderRouter.post('/', orderController.createOrder)
+OrderRouter.get('/revenue', orderController.totalrevenue)
 
 export default OrderRouter
