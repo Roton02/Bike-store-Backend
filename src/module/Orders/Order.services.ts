@@ -37,14 +37,21 @@ const OrderBikeIntroDB = async (orderData: IOrder) => {
   return
 }
 
-//TODO : multifly value is not correct 
+//TODO : multifly value is not correct
 const totalRevenueFromDB = async () => {
   const result = await OrderModel.aggregate([
-    {$group : {'_id': "$quantity" , 'totalQuantity' : {$sum : '$quantity'}, 'totalPrice' :{$sum :'$totalPrice'}} },
-    // {$group : {'_id': "$totalPrice" , 'totalPriceValue' : {$sum : '$totalPrice'}} },
-    {$project : {_id : -1 , totalRevenue :{$multiply : ['$totalQuantity' , '$totalPrice']}}}
+    {
+      $group: {
+        _id: 'null',
+        totalRevenue: { $sum: { $multiply: ['$quantity', '$totalPrice'] } },
+      },
+    },
+    {
+      $project : {totalRevenue:1 ,_id :0}
+    }
   ])
-  console.log(result , 'asdffasdfsdf');
+
+  // console.log(result, 'asdffasdfsdf')
   return result
 }
 export const OrderServices = {
