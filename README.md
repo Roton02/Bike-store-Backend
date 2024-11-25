@@ -1,51 +1,18 @@
-# Bike Store API
+# Bike Store Backend
 
-A fully-featured **Bike Store API** built with **Express.js** and **TypeScript**, using **MongoDB** and **Mongoose** for database management. This project enables efficient management of bike products and customer orders, featuring robust CRUD operations and data integrity validations.
-
-## Table of Contents
-1. [Objective](#objective)
-2. [Tech Stack](#tech-stack)
-3. [Features](#features)
-4. [API Endpoints](#api-endpoints)
-5. [Installation and Setup](#installation-and-setup)
-6. [Error Handling](#error-handling)
-7. [Submission Requirements](#submission-requirements)
-
----
-
-## Objective
-
-To create a RESTful API that manages bikes and orders for a bike store. The application ensures data integrity through schema validation using **Mongoose** and offers insightful metrics like revenue calculation.
-
----
-
-## Tech Stack
-
-- **Backend**: Node.js, Express.js, TypeScript
-- **Database**: MongoDB, Mongoose
-- **Tools**: Postman for API testing
-- **Version Control**: Git/GitHub
+A simple and efficient **RESTful API** built with **Express.js** and **TypeScript** to manage bike products and customer orders. This API supports core features like bike management, order creation, and revenue calculation.
 
 ---
 
 ## Features
 
-### 1. Product Management
-- Add, view, update, and delete bikes.
-- Support for filtering and searching by name, brand, or category.
-- Validation for bike properties, including enums for categories.
-
-### 2. Order Management
-- Place orders for bikes with inventory management.
-- Validate and calculate total price based on order quantity.
-- Update product stock based on orders.
-
-### 3. Aggregated Revenue Metrics
-- Calculate total revenue from all orders using MongoDB aggregation.
-
-### 4. Error Handling
-- Comprehensive error responses for invalid input and insufficient stock.
-- Detailed validation errors for better debugging.
+- **Product Management**
+  - Add, view, update, and delete bikes.
+  - Filter products by name.
+- **Order Management**
+  - Place orders for bikes and manage stock.
+- **Revenue Insights**
+  - Calculate total revenue from all orders.
 
 ---
 
@@ -56,7 +23,7 @@ To create a RESTful API that manages bikes and orders for a bike store. The appl
 | Endpoint                     | Method | Description                         |
 |------------------------------|--------|-------------------------------------|
 | `/api/products`              | POST   | Add a new bike                     |
-| `/api/products`              | GET    | Get all bikes or filter by query   |
+| `/api/products`              | GET    | Get all bikes or filter by name    |
 | `/api/products/:productId`   | GET    | Retrieve details of a specific bike|
 | `/api/products/:productId`   | PUT    | Update details of a specific bike  |
 | `/api/products/:productId`   | DELETE | Delete a specific bike             |
@@ -70,15 +37,26 @@ To create a RESTful API that manages bikes and orders for a bike store. The appl
 
 ---
 
-## Installation and Setup
+## Getting Started
 
-### Prerequisites
-- Node.js (v14+)
-- MongoDB instance
-- npm or yarn
-
-### Steps
-1. Clone the repository:
+1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/your-username/bike-store-api.git
-   cd bike-store-api
+   git clone https://github.com/roton02/Bike-store-Backend.git
+   cd Bike-store-Backend
+Install Dependencies:
+
+bash
+Copy code
+npm install
+Configure Environment:
+
+Create a .env file and add:
+env
+Copy code
+PORT=5000
+MONGO_URI=mongodb://localhost:27017/bike-store
+Run the Server:
+
+bash
+Copy code
+npm run dev
