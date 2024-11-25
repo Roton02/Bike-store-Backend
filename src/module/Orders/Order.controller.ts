@@ -5,6 +5,7 @@ const createOrder = async (req: Request, res: Response) => {
   try {
     const OrderData = req.body
     const result = await OrderServices.OrderBikeIntroDB(OrderData)
+    console.log(result);
     res.status(200).json({
       message: 'Order created successfully',
       success: true,

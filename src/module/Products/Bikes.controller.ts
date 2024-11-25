@@ -27,9 +27,8 @@ const createBike = async (req: Request, res: Response) => {
 const getAllBikes = async (req: Request, res: Response) => {
   try {
     const searchTerm = req.query
-    const result = await bikesServices.getAllBikesFromDb(searchTerm)
+    const result = await bikesServices.getAllBikesFromDb(searchTerm as string | undefined)
     //throw an error
-    // console.log('result is ', result)
     if (result.length > 0) {
       res.status(200).json({
         message: 'Bikes retrieved successfully',

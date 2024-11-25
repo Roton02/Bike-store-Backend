@@ -10,34 +10,35 @@ const OrderBikeIntroDB = async (orderData: IOrder) => {
   if (isExistBike) {
     const cheekQuantity = isExistBike.quantity - orderData.quantity
     // console.log(cheekQuantity)
-    if (cheekQuantity <= 0) {
+    if (!isExistBike.inStock) {
+      throw new Error('inStock is false thats why unavailable product  !')
+    }
+    if(isExistBike.quantity === 0){
+      throw new Error('Stock  is Empty Quantity is 0 !')
+    }
+    if (cheekQuantity < 0) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const result = await BikeModel.findByIdAndUpdate(productId, {
         inStock: false,
       })
-      // console.log('updated result' ,result);
-      return { success: false, message: 'stock is over ' }
+      throw new Error('Stock is Empty !')
     }
-    if (!isExistBike.inStock) {
-      return {
-        success: false,
-        message: 'inStock is false thats why unavailable product  ',
-      }
-    }
-    if (isExistBike && cheekQuantity > 0) {
-      const decrement = await BikeModel.findByIdAndUpdate(productId, {
+   
+    if (isExistBike && cheekQuantity >= 0) {
+      await BikeModel.findByIdAndUpdate(productId, {
         $inc: { quantity: -orderData.quantity },
       })
-      console.log(decrement, 'decrement from bikes collection')
+      // console.log(decrement, 'decrement from bikes collection')
       const result = await OrderModel.create(orderData)
       return result
     }
   }
-  console.log('something is gone a wrong')
-  return {success : false , } 
+  // console.log('something is gone a wrong')
+  throw new Error('there are no Product here with is ID!')
+  // { success: false, status : 404  , message: 'there are no Product here with is ID ' }
 }
 
-//TODO : multifly value is not correct
+//DONE : multifly value is not correct
 const totalRevenueFromDB = async () => {
   const result = await OrderModel.aggregate([
     {
@@ -47,8 +48,8 @@ const totalRevenueFromDB = async () => {
       },
     },
     {
-      $project : {totalRevenue:1 ,_id :0}
-    }
+      $project: { totalRevenue: 1, _id: 0 },
+    },
   ])
 
   // console.log(result, 'asdffasdfsdf')
