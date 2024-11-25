@@ -11,12 +11,13 @@ const createOrder = async (req: Request, res: Response) => {
       data: result,
     })
     //TODO : error message gula thik kora lagbe --//
-  } catch (error) {
-    console.log(error)
+  } catch (error: any) {
+    // console.log(error)
     res.status(500).json({
       success: false,
       message: error.name,
       error: error,
+      stack: process.env.NODE_ENV === 'production' ? null : error.stack,
     })
   }
 }
@@ -29,11 +30,12 @@ const totalrevenue = async (req: Request, res: Response) => {
       success: true,
       data: result[0],
     })
-  } catch (error) {
+  } catch (error: any) {
     res.status(500).json({
       success: false,
       message: error.name,
       error: error,
+      stack: process.env.NODE_ENV === 'production' ? null : error.stack,
     })
   }
 }

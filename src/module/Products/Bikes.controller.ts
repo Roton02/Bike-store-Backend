@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Request, Response } from 'express'
 import { bikesServices } from './Bikes.services'
 // import BikeZodValidation from './Bike.validation'
@@ -12,11 +13,13 @@ const createBike = async (req: Request, res: Response) => {
       success: true,
       data: result,
     })
-  } catch (error) {
+  } catch (error: any) {
+    console.log(error)
     res.status(500).json({
       success: false,
       message: error.name,
       error: error,
+      stack: process.env.NODE_ENV === 'production' ? null : error.stack,
     })
   }
 }
@@ -25,16 +28,26 @@ const getAllBikes = async (req: Request, res: Response) => {
   try {
     const searchTerm = req.query
     const result = await bikesServices.getAllBikesFromDb(searchTerm)
-    res.status(200).json({
-      message: 'Bikes retrieved successfully',
-      success: true,
-      data: result,
-    })
-  } catch (error) {
+    //throw an error
+    // console.log('result is ', result)
+    if (result.length > 0) {
+      res.status(200).json({
+        message: 'Bikes retrieved successfully',
+        success: true,
+        data: result,
+      })
+    } else {
+      res.status(500).json({
+        success: false,
+        message: 'data is not found ',
+      })
+    }
+  } catch (error: any) {
     res.status(500).json({
       success: false,
       message: error.name,
       error: error,
+      stack: process.env.NODE_ENV === 'production' ? null : error.stack,
     })
   }
 }
@@ -49,11 +62,12 @@ const getSpecificBike = async (req: Request, res: Response) => {
       success: true,
       data: result,
     })
-  } catch (error) {
+  } catch (error: any) {
     res.status(500).json({
       success: false,
       message: error.name,
       error: error,
+      stack: process.env.NODE_ENV === 'production' ? null : error.stack,
     })
   }
 }
@@ -69,11 +83,12 @@ const updateProducts = async (req: Request, res: Response) => {
       success: true,
       data: result,
     })
-  } catch (error) {
+  } catch (error: any) {
     res.status(500).json({
       success: false,
       message: error.name,
       error: error,
+      stack: process.env.NODE_ENV === 'production' ? null : error.stack,
     })
   }
 }
@@ -89,11 +104,12 @@ const deleteBike = async (req: Request, res: Response) => {
       success: true,
       data: {},
     })
-  } catch (error) {
+  } catch (error: any) {
     res.status(500).json({
       success: false,
       message: error.name,
       error: error,
+      stack: process.env.NODE_ENV === 'production' ? null : error.stack,
     })
   }
 }

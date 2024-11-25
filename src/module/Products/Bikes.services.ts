@@ -11,7 +11,7 @@ const getAllBikesFromDb = async (searchTerms: {
   searchTerm: string | undefined
 }): Promise<IBike[]> => {
   const { searchTerm } = searchTerms
-  console.log('queryParams :', searchTerm)
+  // console.log('queryParams :', searchTerm)
   if (searchTerm) {
     const search = new RegExp(searchTerm, 'i')
     const result = await BikeModel.find({ name: { $regex: search } })

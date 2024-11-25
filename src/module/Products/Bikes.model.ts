@@ -38,11 +38,11 @@ const BikesSchema = new Schema<IBike>(
     },
     inStock: {
       type: Boolean,
-      required: [true, 'inStock must be a boolean value'],
+      required: [true, 'inSock in required and  must be a boolean value'],
     },
   },
   {
-    timestamps: true, 
+    timestamps: true,
     versionKey: false,
   }
 )
