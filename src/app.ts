@@ -9,6 +9,14 @@ app.use(express.json())
 
 app.use('/api/products', BikesRouter) //    /api/products
 app.use('/api/orders', OrderRouter)
+// app.use('/')
+
+app.get('/', (req :Request , res:Response)=>{
+  res.json({
+    success:true ,
+    message:'welcome bike store backend '
+  })
+})
 
 app.use((req: Request, res: Response) => {
   res.status(404).json({
