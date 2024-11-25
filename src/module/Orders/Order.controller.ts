@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Request, Response } from 'express'
 import { OrderServices } from './Order.services'
 
@@ -5,7 +6,6 @@ const createOrder = async (req: Request, res: Response) => {
   try {
     const OrderData = req.body
     const result = await OrderServices.OrderBikeIntroDB(OrderData)
-    console.log(result);
     res.status(200).json({
       message: 'Order created successfully',
       success: true,
@@ -13,7 +13,6 @@ const createOrder = async (req: Request, res: Response) => {
     })
     //TODO : error message gula thik kora lagbe --//
   } catch (error: any) {
-    // console.log(error)
     res.status(500).json({
       success: false,
       message: error.name,

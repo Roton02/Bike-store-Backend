@@ -14,7 +14,6 @@ const createBike = async (req: Request, res: Response) => {
       data: result,
     })
   } catch (error: any) {
-    console.log(error)
     res.status(500).json({
       success: false,
       message: error.name,
@@ -26,8 +25,11 @@ const createBike = async (req: Request, res: Response) => {
 
 const getAllBikes = async (req: Request, res: Response) => {
   try {
-    const searchTerm = req.query
-    const result = await bikesServices.getAllBikesFromDb(searchTerm as string | undefined)
+    // const searchTerm = req.query
+    const { searchTerm } = req.query as { searchTerm?: string };
+    const term = searchTerm || "";
+    // const term = typeof searchTerm === 'string' ? searchTerm : undefined;
+    const result = await bikesServices.getAllBikesFromDb(term)
     //throw an error
     if (result.length > 0) {
       res.status(200).json({

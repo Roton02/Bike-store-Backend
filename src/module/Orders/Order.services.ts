@@ -11,17 +11,17 @@ const OrderBikeIntroDB = async (orderData: IOrder) => {
     const cheekQuantity = isExistBike.quantity - orderData.quantity
     // console.log(cheekQuantity)
     if (!isExistBike.inStock) {
-      throw new Error('inStock is false thats why unavailable product  !')
+      throw new Error('insufficient stock !')
     }
     if(isExistBike.quantity === 0){
-      throw new Error('Stock  is Empty Quantity is 0 !')
+      throw new Error('insufficient stock !')
     }
     if (cheekQuantity < 0) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const result = await BikeModel.findByIdAndUpdate(productId, {
         inStock: false,
       })
-      throw new Error('Stock is Empty !')
+      throw new Error('insufficient stock!')
     }
    
     if (isExistBike && cheekQuantity >= 0) {
@@ -34,7 +34,7 @@ const OrderBikeIntroDB = async (orderData: IOrder) => {
     }
   }
   // console.log('something is gone a wrong')
-  throw new Error('there are no Product here with is ID!')
+  throw new Error('order is not found !')
   // { success: false, status : 404  , message: 'there are no Product here with is ID ' }
 }
 
