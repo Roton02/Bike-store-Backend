@@ -43,20 +43,31 @@ A simple and efficient **RESTful API** built with **Express.js** and **TypeScrip
    ```bash
    git clone https://github.com/roton02/Bike-store-Backend.git
    cd Bike-store-Backend
+
 Install Dependencies:
 
-bash
-Copy code
-npm install
-Configure Environment:
+Step 2: Install Dependencies
+Run the following command to install all required packages:
 
+  ```bash
+npm install
+
+Step 3: Setup Environment Variables
+Configure the .env file in the root directory to include the necessary environment variables:
+
+PORT
+MONGO_URI
+NODE_ENV
+ - 
 Create a .env file and add:
 env
-Copy code
+  ```bash
 PORT=5000
-MONGO_URI=mongodb://localhost:27017/bike-store
-Run the Server:
 
-bash
-Copy code
+DATABASE_URL =mongodb+srv://next-level-a2-user:a2121212@cluster0.mi2xoxt.mongodb.net/bike-store?retryWrites=true&w=majority&appName=Cluster0
+
+Step 4: Start the Server
+Use this command to start the server in development mode: 
+
+```bash
 npm run dev
