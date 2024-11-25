@@ -7,8 +7,8 @@ const OrderSchema = new Schema<IOrder>(
     email: {
       type: String,
       required: [true, 'email is required'],
-      trim:true,
-      validate: [ isEmail, 'invalid email' ]
+      trim: true,
+      validate: [isEmail, 'invalid email'],
     },
     product: {
       type: String,

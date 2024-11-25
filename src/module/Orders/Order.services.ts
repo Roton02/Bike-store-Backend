@@ -13,7 +13,7 @@ const OrderBikeIntroDB = async (orderData: IOrder) => {
     if (!isExistBike.inStock) {
       throw new Error('insufficient stock !')
     }
-    if(isExistBike.quantity === 0){
+    if (isExistBike.quantity === 0) {
       throw new Error('insufficient stock !')
     }
     if (cheekQuantity < 0) {
@@ -23,7 +23,7 @@ const OrderBikeIntroDB = async (orderData: IOrder) => {
       })
       throw new Error('insufficient stock!')
     }
-   
+
     if (isExistBike && cheekQuantity >= 0) {
       await BikeModel.findByIdAndUpdate(productId, {
         $inc: { quantity: -orderData.quantity },
@@ -34,7 +34,7 @@ const OrderBikeIntroDB = async (orderData: IOrder) => {
     }
   }
   // console.log('something is gone a wrong')
-  throw new Error('order is not found !')
+  throw new Error('Order is not found !')
   // { success: false, status : 404  , message: 'there are no Product here with is ID ' }
 }
 
