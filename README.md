@@ -51,7 +51,7 @@ Run the following command to install all required packages:
 
   ```bash
 npm install
-
+```
 Step 3: Setup Environment Variables
 Configure the .env file in the root directory to include the necessary environment variables:
 
@@ -65,7 +65,7 @@ env
 PORT=5000
 
 DATABASE_URL =mongodb+srv://next-level-a2-user:a2121212@cluster0.mi2xoxt.mongodb.net/bike-store?retryWrites=true&w=majority&appName=Cluster0
-
+```
 Step 4: Start the Server
 Use this command to start the server in development mode: 
 
